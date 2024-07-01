@@ -1,3 +1,9 @@
+<script setup>
+import HelloWorld from '@/components/PortfolioComponent.vue';
+</script>
 <template>
-    projet
+ <HelloWorld/>
 </template>
+<style scoped>
+
+</style>

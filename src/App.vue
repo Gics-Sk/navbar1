@@ -1,5 +1,10 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
+import { ref } from 'vue';
+const isOpen = ref(false);
+const toogleMenu = () => {
+  isOpen.value = !isOpen.value
+}
 </script>
 
 <template>
@@ -23,38 +28,103 @@ import { RouterLink, RouterView } from 'vue-router'
         </path>
       </svg>
     </div>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink to="/projet">Projet</RouterLink>
-      <RouterLink to="/contact">Contact</RouterLink>
+
+    <!-- <div class="close"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+          fill="#5f6368">
+          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg></div> -->
+    <nav class="nav">
+      <ul class="nav-links"  v-if="!isOpen">
+        <li>
+          <RouterLink to="/">Home</RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/about">About</RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/projet">Projet</RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/contact">Contact</RouterLink>
+        </li>
+      </ul>
     </nav>
+    <svg @click="toogleMenu" class="bar" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960"
+      width="50px" fill="#5f6368">
+      <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+    </svg>
   </header>
   <RouterView />
 </template>
 
 <style scoped>
-
 header {
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  padding:1rem 5rem;
+  padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-   rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
-nav {
-display: flex;
-gap: 3rem;
+
+.nav .nav-links {
+  display: flex;
+  justify-content: center;
+  
 }
+
+.nav .nav-links li {
+  display: flex;
+  margin-left: 5rem;
+}
+
 a {
   text-decoration: none;
   text-transform: capitalize;
-  color:#14424C;
+  color: #14424C;
   font-weight: bold;
 }
-a:hover{
+
+a:hover {
   color: #C85D1B;
+}
+
+.bar {
+  display: none;
+  position: absolute;
+  top: .5rem;
+  right: 1rem;
+
+}
+
+@media screen and (max-width:900px) {
+  .nav .nav-links {
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f1f1e3;
+    position: absolute;
+    width:100%;
+    height: 100vh;
+    top: 4.9rem;
+    left: -100px;
+    justify-content: center;
+    align-items: center;
+    transition:cubic-bezier(.25,1,.30,1);
+    z-index:1;
+  }
+
+  .nav .nav-links li {
+    margin-top: 5rem;
+
+  }
+
+  .bar {
+    display: block;
+  }
 }
 </style>

@@ -1,7 +1,11 @@
-body{
+*{
   margin: 0;
   box-sizing: border-box;
   line-height: 1.5;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1rem;
+  list-style: none;
+}
+body {
+  background-color: #bdb9b9;
 }
